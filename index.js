@@ -6,7 +6,18 @@ const router = require("./routes/mainRouter");
 
 const app = express();
 
-app.use(cors());
+const allowedOrigins = [
+  "https://your-frontend.onrender.com", // Update with your frontend Render URL
+  "http://localhost:3000", // Allow local frontend for development
+];
+
+app.use(cors({
+  origin: allowedOrigins,
+  methods: "GET, POST, PUT, DELETE",
+  allowedHeaders: "Content-Type, Authorization",
+  credentials: true,
+}));
+
 app.use("/uploads", express.static("uploads"));
 app.use(express.json());
 
